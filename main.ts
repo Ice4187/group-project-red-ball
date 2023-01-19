@@ -9,14 +9,17 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.ground, function (sprite, otherSprite) {
     first_bounce = 101 < ball.vy
-    second_bounce = 50 < (ball.vy < 101)
+    second_bounce = ball.vy < 101 && 50 < ball.vy
     if (first_bounce) {
         ball.vy = -100
     } else if (second_bounce) {
         ball.vy = -49
     } else {
         ball.vy = 0
+        ball.ay = 0
     }
+    pause(500)
+    Gravity()
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ball.vx += -20
